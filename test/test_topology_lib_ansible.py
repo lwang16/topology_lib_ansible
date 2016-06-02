@@ -29,5 +29,4 @@ def test_init_ansible():
     """
     Document your test case here.
     """
-    library.init_ansible_control_machine(enode)
     pass
