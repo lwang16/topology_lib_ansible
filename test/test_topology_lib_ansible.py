@@ -21,12 +21,13 @@ Test suite for module topology_lib_ansible.
 
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
+import pytest
+from topology_lib_ansible import library
 
-# Add your test cases here.
 
-
-def test_your_test_case():
+def test_init_ansible():
     """
     Document your test case here.
     """
+    library.init_ansible_control_machine(enode)
     pass

@@ -21,23 +21,30 @@ topology_lib_ansible communication library implementation.
 
 from __future__ import unicode_literals, absolute_import
 from __future__ import print_function, division
+import subprocess
 
-# Add your library functions here.
 
-
-def your_function_here(enode, your_param, shell=None):
+def init_ansible_control_machine(enode):
     """
-    Document your function here.
+    Install Ansible and required packages to setup ansible control machine
 
     :param topology.platforms.base.BaseNode enode: Engine node to communicate
      with.
-    :param bool your_param: This is an example parameter, read the comment
-     below.
-    :param str shell: Shell name to execute commands.
     """
-    pass
-
-    # Usually, the library functions use the parameters to build a command that
+    cmd_check_git = 'which git'
+    re_check_git = enode(cmd_check_git, shell='bash')
+    if 'git' not in re_cehck_git:
+        cmd_install_git = 'apt-get install git'
+        enode(cmd_install_git, shell ='bash')
+        re_check_git = enode(cmd_check_git, shell='bash')
+        assert 'git' not in re_check_git, \
+          "Failed to install git!"
+    cmd_get_script = "git clone https://github.com/nshinde5486/install-ansible.git"
+    re_get_script = enode(cmd_get_script, shell='bash')
+    assert 'fatal' not in re_get_script, \
+      "Failed to fetch Ansible installation script!"
+    subprocess.call(['install-ansible/install_ansible.sh'])
+  # Usually, the library functions use the parameters to build a command that
     # is to be sent to the enode, for example:
     #
     # command = 'echo "something"'
@@ -52,5 +59,5 @@ __all__ = [
     # The Topology framework loads the functions that are in this list to be
     # used as libraries, so, if you want your function to be loaded, add it
     # here.
-    'your_function_here'
+    'init_ansible_control_machine'
 ]
