@@ -33,7 +33,7 @@ def init_ansible_control_machine(enode):
     """
     cmd_check_git = 'which git'
     re_check_git = enode(cmd_check_git, shell='bash')
-    if 'git' not in re_cehck_git:
+    if 'git' not in re_check_git:
         cmd_install_git = 'apt-get install git'
         enode(cmd_install_git, shell ='bash')
         re_check_git = enode(cmd_check_git, shell='bash')
@@ -44,7 +44,7 @@ def init_ansible_control_machine(enode):
     assert 'fatal' not in re_get_script, \
       "Failed to fetch Ansible installation script!"
     subprocess.call(['install-ansible/install_ansible.sh'])
-  # Usually, the library functions use the parameters to build a command that
+    # Usually, the library functions use the parameters to build a command that
     # is to be sent to the enode, for example:
     #
     # command = 'echo "something"'
