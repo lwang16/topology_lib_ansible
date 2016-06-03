@@ -43,7 +43,7 @@ def init_ansible_control_machine(enode):
     re_get_script = enode(cmd_get_script, shell='bash')
     assert 'fatal' not in re_get_script, \
       "Failed to fetch Ansible installation script!"
-    subprocess.call(['install-ansible/install_ansible.sh'])
+    subprocess.call(['. install-ansible/install_ansible.sh'], shell=True)
     # Usually, the library functions use the parameters to build a command that
     # is to be sent to the enode, for example:
     #
